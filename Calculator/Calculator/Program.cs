@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Advanced_Calculator
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -59,9 +59,9 @@ namespace Advanced_Calculator
 
             for (int i = 0; i < expression.Length; i++)   // Start scanning the expression
             {
-                if (expression[i] >= '0' && expression[i] <= '9')   // If a number is found, append it to the temporary string
+                if ((expression[i] >= '0' && expression[i] <= '9') || expression[i] == '.')   // If a number is found, append it to the temporary string
                 {
-                    while (i < expression.Length && expression[i] >= '0' && expression[i] <= '9')
+                    while (i < expression.Length && ((expression[i] >= '0' && expression[i] <= '9') || expression[i] == '.'))
                     {
                         temp.Append(expression[i]);
                         i++;
@@ -80,7 +80,7 @@ namespace Advanced_Calculator
                 }
                 else
                 {
-                    return "Invalid character in expression, Try again";    // Throw error message if invalid character encountered
+                    return "Invalid character in expression.";    // Throw error message if invalid character encountered
                 }
             }
 
@@ -118,7 +118,7 @@ namespace Advanced_Calculator
                 case '/':
                     if (num2 == 0)
                     {
-                        throw new DivideByZeroException("Can't divide by zero.");
+                        throw new DivideByZeroException("Cannot divide by zero.");
                     }
                     return num1 / num2;
 
@@ -144,7 +144,8 @@ namespace Advanced_Calculator
                 {
                     if (stack.Count < 2)  // Handle potential errors if there are not enough numbers
                     {
-                        throw new InvalidOperationException("Insufficient operands.");
+                        //throw new InvalidOperationException("Insufficient operands.");
+                        continue;
                     }
 
                     double num2 = stack.Pop();   // pop the two numbers from the top of the stack and store them
