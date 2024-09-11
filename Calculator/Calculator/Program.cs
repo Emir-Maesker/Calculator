@@ -37,13 +37,16 @@ namespace Advanced_Calculator
         {
             switch (c)
             {
+                case '(':
+                    return 1;   // Left bracket will be the lowest priority with a 1
+
                 case '+':
                 case '-':
-                    return 1;   // Low priority will be 1
+                    return 2;   // Low priority symbol will be 2
 
                 case '*':
                 case '/':
-                    return 2;   // high priority will be 2
+                    return 3;   // high priority symbol will be 3
 
                 default:
                     return 0;   // Invalid operator    
@@ -69,6 +72,24 @@ namespace Advanced_Calculator
                     temp.Append(' ');  // Add a space between characters to seperate them
                     i--;
                 }
+                else if (expression[i] == '(')  // If the expression is a '(', push it to the stack
+                {
+                    Symbols.Push(expression[i]);
+                    temp.Append(' ');
+                }
+                else if (expression[i] == ')')  // If the expression is a ')', run a loop
+                {
+                    while (Symbols.Count > 0 && Symbols.Peek()!='(')  // Pop items currently on the stack and append them to the postfix until you encounter a '('
+                    {
+                        temp.Append(Symbols.Pop());
+                        temp.Append(' ');
+                    }
+
+                    if (Symbols.Count > 0 && Symbols.Peek() == '(')
+                    {
+                        Symbols.Pop();
+                    }
+                }
                 else if (expression[i] == '+' || expression[i] == '-' || expression[i] == '*' || expression[i] == '/')   // If a symbol is found, add it to the stack
                 {
                     while (Symbols.Count > 0 && GetPrecedence(Symbols.Peek()) >= GetPrecedence(expression[i]))     // Check if the stack is not empty, and if the top of the stack already has a higher precedence symbol than the one currently being scanned 
@@ -77,19 +98,19 @@ namespace Advanced_Calculator
                         temp.Append(' ');
                     }
                     Symbols.Push(expression[i]);   // If the stack is empty however, push the current symbol into the stack
+                    
                 }
                 else
                 {
-                    return "Invalid character in expression.";    // Throw error message if invalid character encountered
+                    return "Invalid character.";    // Throw error message if invalid character encountered
                 }
             }
 
-            while (Symbols.Count > 0)  // With the first loop finished, we will have one last symbol in the stack, therefore we need to pop it into the temporary string
-            {
+            while (Symbols.Count > 0 )  // With the first loop finished, we will have one last symbol in the stack, therefore we need to pop it into the temporary string
+            {   
                 temp.Append(Symbols.Pop());  // Now the temporary string contains the full Postfix expression
                 temp.Append(' ');
             }
-
             return temp.ToString();
         }
 
@@ -123,12 +144,10 @@ namespace Advanced_Calculator
                     return num1 / num2;
 
                 default:
-                    throw new InvalidOperationException("Invalid symbol.");
+                    throw new InvalidOperationException("Invalid symbol."); //"Invalid symbol.");
             }
         }
 
-
-        // This method will handle the Postfix expression and convert it into a result
         public static double EvaluatePostfix(string postfix)
         {
             Stack<double> stack = new Stack<double>();  // Create a new stack for evaluation
@@ -147,7 +166,6 @@ namespace Advanced_Calculator
                         //throw new InvalidOperationException("Insufficient operands.");
                         continue;
                     }
-
                     double num2 = stack.Pop();   // pop the two numbers from the top of the stack and store them
                     double num1 = stack.Pop();
 
@@ -158,6 +176,11 @@ namespace Advanced_Calculator
             }
             return stack.Pop();   // The final result should be the only value left in the stack, so pop it and return it
         }
+
+
+      
+        
+
     }
 }
     

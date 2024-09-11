@@ -43,6 +43,7 @@ namespace GCSCalculator
 
         static string postfixexpression = string.Empty;
         static string expression = string.Empty;
+        string Infixexpression = string.Empty;
         double result = 0.0;
         bool displayedResult = false;
         bool errorMessage = false;
@@ -64,9 +65,8 @@ namespace GCSCalculator
             if (displayedResult is true)
             {
 
-                if (button.Tag.ToString() == "+" || button.Tag.ToString() == "-" || button.Tag.ToString() == "*" || button.Tag.ToString() == "/")
-                {
-                    
+                if (button.Tag.ToString() == "+" || button.Tag.ToString() == "-" || button.Tag.ToString() == "*" || button.Tag.ToString() == "/" || button.Tag.ToString() == "(")
+                {   
                     postfixexpression = result.ToString();
                     expression = button.Tag.ToString();
                     displayedResult = false;
@@ -89,9 +89,6 @@ namespace GCSCalculator
             resultTxtBox.Text = resultTxtBox.Text + expression;
         }
 
-
-        
-
         private void backbtn(object sender, RoutedEventArgs e)
         {
             if (postfixexpression.Length > 0)
@@ -102,12 +99,11 @@ namespace GCSCalculator
             }
         }
         
-        
         private void Resultbtn(object sender, RoutedEventArgs e)
         {
             try
             {
-                string Infixexpression = Advanced_Calculator.Program.InfixToPostfix(postfixexpression);
+                Infixexpression = Advanced_Calculator.Program.InfixToPostfix(postfixexpression);
                 result = Advanced_Calculator.Program.EvaluatePostfix(Infixexpression);
                 resultTxtBox.Text = result.ToString();
                 operationTxtbox.Text = postfixexpression;
@@ -117,6 +113,7 @@ namespace GCSCalculator
             catch (Exception ex)
             {
                 resultTxtBox.Text = ex.Message;
+                operationTxtbox.Text = postfixexpression;
                 errorMessage = true;
             }
 

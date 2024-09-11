@@ -83,7 +83,7 @@
                         TextWrapping="Wrap"
                         FontWeight="Medium"
                         Foreground="Gray"
-                        FontSize="15" Margin="20,0,16,407" />
+                        FontSize="15" Margin="16,0,16,405" />
 
                     <TextBlock 
                         Name="resultTxtBox"

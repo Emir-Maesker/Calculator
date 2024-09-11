@@ -21,12 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Calculator">
-      <HintPath>..\..\Emir-Maesker\Calculator\Calculator\bin\Debug\net8.0\Calculator.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\Back.png" />
     <Resource Include="Images\fullscreen.png" />
     <Resource Include="Images\Minimize.png" />
