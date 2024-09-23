@@ -49,7 +49,7 @@ namespace Advanced_Calculator
                     return 3;   // high priority symbol will be 3
 
                 default:
-                    return 0;   // Invalid operator    
+                    return 0;   // Invalid operator   
             }
         }
 

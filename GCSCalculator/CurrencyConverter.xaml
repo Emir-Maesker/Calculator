@@ -56,7 +56,7 @@
                 Margin="4,29,285,22" 
                 Background="Transparent" 
                 BorderThickness="0" 
-                >
+                Click="OpenCalculatorWindow">
                 <Image Source="Images/settings.png"     
                  RenderOptions.BitmapScalingMode="Fant"></Image>
             </Button>
@@ -82,15 +82,28 @@
                         <ComboBox 
                               Name="BaseCurrencyComboBox"
                               SelectionChanged="CurrencyComboBox_SelectionChanged" 
-                              Margin="0,60,180,0"
+                              Margin="0,60,140,0"
                               Background="Transparent"
-                              SelectedItem="USD">
+                              SelectedIndex="0">
+                            <ComboBoxItem FontFamily="Figtree" Content="USD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="EUR"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="DZD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="TND"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="GBP"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="CAD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="AUD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="JPY"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="NZD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="RUB"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="CNY"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="INR"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="BTC"></ComboBoxItem>
                         </ComboBox>
 
 
                         <TextBlock Grid.Row="1" 
                                Name="TargetCurrency"
-                               Text=""
+                               Text="0"
                                TextAlignment="Left"
                                TextWrapping="Wrap"
                                FontWeight="Medium"
@@ -100,8 +113,21 @@
                         <ComboBox Grid.Row="1"
                               Name="TargetCurrencyComboBox"
                               SelectionChanged="TargetCurrencyComboBox_SelectionChanged" 
-                              Margin="0,60,180,0"
-                              >
+                              Margin="0,60,140,0"
+                               SelectedIndex="1">
+                            <ComboBoxItem FontFamily="Figtree" Content="USD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="EUR"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="DZD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="TND"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="GBP"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="CAD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="AUD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="JPY"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="NZD"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="RUB"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="CNY"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="INR"></ComboBoxItem>
+                            <ComboBoxItem FontFamily="Figtree" Content="BTC"></ComboBoxItem>
                         </ComboBox>
 
                     </Grid>
@@ -131,7 +157,7 @@
                                HorizontalAlignment="Center"
                                RenderOptions.BitmapScalingMode="Fant" Width="53" Height="19"></Image>
                         </Button>
-                        <Button Grid.Column="0" Grid.Row="1" TextBlock.FontSize="20" TextBlock.FontWeight="Medium" Background="#121416" BorderBrush="#3A4149" Foreground="White" Margin="1,1,1,1" >UPDATE</Button>
+                        <Button Grid.Column="0" Grid.Row="1" TextBlock.FontSize="20" TextBlock.FontWeight="Medium" Background="#121416" BorderBrush="#3A4149" Foreground="White" Margin="1,1,1,1" Click="Convertbtn">CONVERT</Button>
                         <Button Grid.Column="1" Grid.Row="1" TextBlock.FontSize="20" TextBlock.FontWeight="Medium" Background="#121416" BorderBrush="#3A4149" Foreground="Gray" Name="Clearbtn" Click="Clearbtn_Click" Margin="1,1,1,1" >AC</Button>
                         <Button Grid.Column="0" Grid.Row="2" TextBlock.FontSize="25" TextBlock.FontWeight="Medium" Background="Black" BorderBrush="#3A4149" Foreground="White" Tag="7" Click="Button_Click" Margin="1,1,1,1" >7</Button>
                         <Button Grid.Column="1" Grid.Row="2" TextBlock.FontSize="25" TextBlock.FontWeight="Medium" Background="Black" BorderBrush="#3A4149" Foreground="White" Tag="8" Click="Button_Click" Margin="1,1,1,1" >8</Button>

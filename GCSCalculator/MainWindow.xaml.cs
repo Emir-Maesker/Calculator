@@ -23,11 +23,13 @@ namespace GCSCalculator
         {
             InitializeComponent();
         }
+
         // Exit button
         private void Exitbtn(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
+
         // Fullscreen button
         private void Fullscreenbtn(object sender, RoutedEventArgs e)
         {
@@ -35,11 +37,13 @@ namespace GCSCalculator
                 WindowState = WindowState.Normal;
             else WindowState = WindowState.Maximized;
         }
+
         // Minimize button
         private void Minimizebtn(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
+
         // Variables 
         static string postfixexpression = string.Empty;
         static string expression = string.Empty;
@@ -47,6 +51,7 @@ namespace GCSCalculator
         double result = 0.0;
         bool displayedResult = false;
         bool errorMessage = false;
+        
         // Button Clicks
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -82,12 +87,12 @@ namespace GCSCalculator
                     displayedResult = false;
                 }
             }
-            
             postfixexpression += button.Tag.ToString();
             expression = button.Tag.ToString();
             operationTxtbox.Text= postfixexpression;
             resultTxtBox.Text = resultTxtBox.Text + expression;
         }
+
         // Back button
         private void backbtn(object sender, RoutedEventArgs e)
         {
@@ -98,6 +103,7 @@ namespace GCSCalculator
                 resultTxtBox.Text = postfixexpression;
             }
         }
+
         // Result button
         private void Resultbtn(object sender, RoutedEventArgs e)
         {
@@ -118,6 +124,7 @@ namespace GCSCalculator
             }
 
         }
+
         // Clear button
         private void Clearbtn_Click(object sender, RoutedEventArgs e)
         {
@@ -127,6 +134,7 @@ namespace GCSCalculator
             expression = string.Empty;
             result = 0.0;
         }
+
         // C button
         private void Cbtn(object sender, RoutedEventArgs e)
         {
@@ -136,7 +144,8 @@ namespace GCSCalculator
             expression = string.Empty;
             result = 0.0;
         }
-        // Open the Currency Converter window
+
+        // Open the CurrencyConverter window
         private void OpenCurrencyConverterWindow(object sender, RoutedEventArgs e)
         {
             CurrencyConverter converter = new CurrencyConverter();
