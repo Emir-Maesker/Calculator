@@ -294,7 +294,7 @@ namespace GCSCalculator
         public class BBD
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class BDT
@@ -324,7 +324,7 @@ namespace GCSCalculator
         public class BMD
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class BNB
@@ -354,7 +354,7 @@ namespace GCSCalculator
         public class BSD
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class BTC
@@ -390,7 +390,7 @@ namespace GCSCalculator
         public class BZD
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class CAD
@@ -444,13 +444,13 @@ namespace GCSCalculator
         public class CUC
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class CUP
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class CVE
@@ -510,7 +510,7 @@ namespace GCSCalculator
         public class ERN
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class ETB
@@ -720,7 +720,7 @@ namespace GCSCalculator
         public class KPW
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class KRW
@@ -1182,7 +1182,7 @@ namespace GCSCalculator
         public class USD
         {
             public string code { get; set; }
-            public int value { get; set; }
+            public float value { get; set; }
         }
 
         public class USDC
