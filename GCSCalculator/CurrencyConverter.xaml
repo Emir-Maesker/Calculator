@@ -85,19 +85,7 @@
                               Margin="0,60,140,0"
                               Background="Transparent"
                               SelectedIndex="0">
-                            <ComboBoxItem FontFamily="Figtree" Content="USD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="EUR"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="DZD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="TND"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="GBP"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="CAD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="AUD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="JPY"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="NZD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="RUB"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="CNY"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="INR"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="BTC"></ComboBoxItem>
+                            
                         </ComboBox>
 
 
@@ -114,20 +102,8 @@
                               Name="TargetCurrencyComboBox"
                               SelectionChanged="TargetCurrencyComboBox_SelectionChanged" 
                               Margin="0,60,140,0"
-                               SelectedIndex="1">
-                            <ComboBoxItem FontFamily="Figtree" Content="USD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="EUR"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="DZD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="TND"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="GBP"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="CAD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="AUD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="JPY"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="NZD"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="RUB"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="CNY"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="INR"></ComboBoxItem>
-                            <ComboBoxItem FontFamily="Figtree" Content="BTC"></ComboBoxItem>
+                              SelectedIndex="1">
+                            
                         </ComboBox>
 
                     </Grid>

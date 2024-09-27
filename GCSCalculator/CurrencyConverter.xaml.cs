@@ -30,7 +30,6 @@ namespace GCSCalculator
         {
             InitializeComponent();
 
-            Dictionary<string, double> currencyData = new Dictionary<string, double>();
             var jsonString = File.ReadAllText("CurrencyData.json"); 
             dynamic responseObject = JsonConvert.DeserializeObject(jsonString);  
 
@@ -104,16 +103,21 @@ namespace GCSCalculator
         // Base currency Combobox (selection change)
         private async void CurrencyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedBaseCurrencyItem = BaseCurrencyComboBox.SelectedItem as ComboBoxItem;
-            string currency = selectedBaseCurrencyItem.Content.ToString();
-            baseRate = Convert.ToDouble(await GetCurrencyRate(currency));
+            if (BaseCurrencyComboBox.SelectedItem is string selectedBaseCurrency)
+            {
+                string currency = selectedBaseCurrency;
+                baseRate = Convert.ToDouble(await GetCurrencyRate(currency));
+            }
+            
         }
         // Target currency Combobox (selection change)
         private async void TargetCurrencyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedTargetCurrencyItem = TargetCurrencyComboBox.SelectedItem as ComboBoxItem;
-            string currency = selectedTargetCurrencyItem.Content.ToString();
-            targetRate = Convert.ToDouble(await GetCurrencyRate(currency));
+            if (TargetCurrencyComboBox.SelectedItem is string selectedTargetCurrency)
+            {
+                string currency = selectedTargetCurrency;
+                targetRate = Convert.ToDouble(await GetCurrencyRate(currency));
+            }
         }
         // Convert button
         private void Convertbtn(object sender, RoutedEventArgs e)
