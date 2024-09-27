@@ -25,18 +25,26 @@ namespace GCSCalculator
     public partial class CurrencyConverter : Window
     {
         private static readonly string API_KEY = "cur_live_pYWl4uKBnTXuCCDyPDl9yy2mCW7QWb3D0zOaOA2G";  // API key
-        
+
         public CurrencyConverter()
         {
-            InitializeComponent();   
-        }
+            InitializeComponent();
 
+            Dictionary<string, double> currencyData = new Dictionary<string, double>();
+            var jsonString = File.ReadAllText("CurrencyData.json"); 
+            dynamic responseObject = JsonConvert.DeserializeObject(jsonString);  
+
+            foreach (var item in responseObject.data)   // Populate the ComboBoxes
+            {
+                BaseCurrencyComboBox.Items.Add(item.First.code.ToString());
+                TargetCurrencyComboBox.Items.Add(item.First.code.ToString());
+            }
+        }
         // Exit button
         private void Exitbtn(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
         // Fullscreen button
         private void Fullscreenbtn(object sender, RoutedEventArgs e)
         {
@@ -44,13 +52,11 @@ namespace GCSCalculator
                 WindowState = WindowState.Normal;
             else WindowState = WindowState.Maximized;
         }
-
         // Minimize button
         private void Minimizebtn(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
-
         // Variables 
         static string bCurrency = string.Empty;
         static string tCurrency = string.Empty;
@@ -59,7 +65,6 @@ namespace GCSCalculator
         double targetRate = 0.0;
         bool displayedResult = false;
         bool errorMessage = false;
-        
         // Button Clicks
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -70,7 +75,6 @@ namespace GCSCalculator
             BaseCurrency.Text = bCurrency;
             TargetCurrency.Text = TargetCurrency.Text + tCurrency;
         }
-
         // Back button
         private void backbtn(object sender, RoutedEventArgs e)
         {
@@ -81,7 +85,6 @@ namespace GCSCalculator
                 TargetCurrency.Text = tCurrency;
             }
         }
-
         // Clear button
         private void Clearbtn_Click(object sender, RoutedEventArgs e)
         {
@@ -91,7 +94,6 @@ namespace GCSCalculator
             tCurrency = string.Empty;
             result = 0;
         }
-
         // Switch To Calculator Window
         private void OpenCalculatorWindow(object sender, RoutedEventArgs e)
         {
@@ -99,23 +101,20 @@ namespace GCSCalculator
             this.Visibility = Visibility.Hidden;
             calcualtor.Show();
         }
-
         // Base currency Combobox (selection change)
         private async void CurrencyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = (ComboBoxItem)BaseCurrencyComboBox.SelectedValue;
-            string currency = (string)item.Content;
+            var selectedBaseCurrencyItem = BaseCurrencyComboBox.SelectedItem as ComboBoxItem;
+            string currency = selectedBaseCurrencyItem.Content.ToString();
             baseRate = Convert.ToDouble(await GetCurrencyRate(currency));
         }
-
         // Target currency Combobox (selection change)
         private async void TargetCurrencyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedCurrencyItem = (ComboBoxItem)TargetCurrencyComboBox.SelectedValue;
-            string currency = (string)selectedCurrencyItem.Content;
+            var selectedTargetCurrencyItem = TargetCurrencyComboBox.SelectedItem as ComboBoxItem;
+            string currency = selectedTargetCurrencyItem.Content.ToString();
             targetRate = Convert.ToDouble(await GetCurrencyRate(currency));
         }
-
         // Convert button
         private void Convertbtn(object sender, RoutedEventArgs e)
         {
@@ -132,14 +131,14 @@ namespace GCSCalculator
             }
 
         }
-
         //Function to call an API and store the currency rates into a Json text file, then extract the rates from it
         public static async Task<string> GetCurrencyRate(string currency)
         {
-            CurrencyData info; // Variable to store data from inside the CurrencyData class (Object)
-            string? jsonString = null;
-            var fileInfo = new FileInfo("CurrencyData.json");
+            Dictionary<string, double> currencyData = new Dictionary<string, double>();  // Dictionary to store currency data
+            string jsonString = null;  // Variable to store json data from the API call
+            dynamic responseObject;  // Dynamic variable to hold the deserialized JSON response, for easy access to its properties
 
+            var fileInfo = new FileInfo("CurrencyData.json");  // Initialize a new file to store JSON data
             var lastTimeWrite = File.GetLastWriteTime("CurrencyData.json");  // Check the last time the file has been updated
             double timeSinceLastWrite = (DateTime.Now.Subtract(lastTimeWrite).TotalMinutes);  // Substract it from current time
 
@@ -155,40 +154,26 @@ namespace GCSCalculator
 
                         jsonString = await response.Content.ReadAsStringAsync(); // Read the response as a string and store it inside a variable
                         File.WriteAllText("CurrencyData.json", jsonString); // Store the Json string into a file
-                        info = JsonConvert.DeserializeObject<CurrencyData>(jsonString); // Deserialize the JSON string into the CurrencyData object (info)
+                        responseObject = JsonConvert.DeserializeObject(jsonString);  // Deserialize the JSON string into a dynamic variable 
                     }
                 }
-
                 else  // If one day has not passed since last API call
                 {
                     jsonString = File.ReadAllText("CurrencyData.json");  // Read the contents of the Json file
-                    info = JsonConvert.DeserializeObject<CurrencyData>(jsonString);  // Deserialize the JSON string into the CurrencyData class
+                    responseObject = JsonConvert.DeserializeObject(jsonString);  // Deserialize the JSON string fron the file into a dynamic variable
                 }
-
-                return currency switch
+                foreach (var item in responseObject.data)  // Loop to add the data from the Json response or the Json file to the dictionary
                 {
-                    "USD" => info.data.USD.value.ToString(), // US Dollar
-                    "EUR" => info.data.EUR.value.ToString(), // Euro
-                    "DZD" => info.data.DZD.value.ToString(), // Algerian Dinar
-                    "TND" => info.data.TND.value.ToString(), // Tunisian Dinar
-                    "GBP" => info.data.GBP.value.ToString(), // British Pound
-                    "CAD" => info.data.CAD.value.ToString(), // Canadian Dollar
-                    "AUD" => info.data.AUD.value.ToString(), // Australian Dollar
-                    "JPY" => info.data.JPY.value.ToString(), // Japenese Yen
-                    "NZD" => info.data.NZD.value.ToString(), // New Zealand Dollar
-                    "RUB" => info.data.RUB.value.ToString(), // Russian Ruble
-                    "CNY" => info.data.CNY.value.ToString(), // Chinese Yuan
-                    "INR" => info.data.INR.value.ToString(), // Indian Rupee
-                    "BTC" => info.data.BTC.value.ToString(), // Bitcoin
-                };
+                    currencyData.Add(item.First.code.ToString(), item.First.value.Value);
+                }
+                string value = string.Empty; // Variable to store the fetched value from the Dictionary
+                return value = currencyData.First(c => c.Key == currency).Value.ToString(); // Fetch the value from the Dictionary according to the key and return it
             }
-
             // Catch any HTTP-Client request related error
             catch (HttpRequestException ex)
             {
                 return ("Request error: " + ex.Message);
             }
-
             // Catch any general error
             catch (Exception ex)
             {
