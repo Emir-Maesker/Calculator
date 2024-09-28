@@ -69,8 +69,16 @@ namespace GCSCalculator
 
             if (displayedResult is true)
             {
-
-                if (button.Tag.ToString() == "+" || button.Tag.ToString() == "-" || button.Tag.ToString() == "*" || button.Tag.ToString() == "/" || button.Tag.ToString() == "(")
+                if (button.Tag.ToString() == "(")
+                {
+                    result = 0;
+                    postfixexpression = string.Empty;
+                    expression = string.Empty;
+                    operationTxtbox.Text = postfixexpression;
+                    resultTxtBox.Text = expression;
+                    displayedResult = false;
+                }
+                else if (button.Tag.ToString() == "+" || button.Tag.ToString() == "-" || button.Tag.ToString() == "*" || button.Tag.ToString() == "/")
                 {   
                     postfixexpression = result.ToString();
                     expression = button.Tag.ToString();
@@ -87,6 +95,13 @@ namespace GCSCalculator
                     displayedResult = false;
                 }
             }
+
+            else if (displayedResult is false && button.Tag.ToString() == "(" && expression != "+" && expression != "-" && expression != "*" && expression != "/")
+            {
+                expression = string.Empty;
+                postfixexpression += expression + '*';   
+            }
+
             postfixexpression += button.Tag.ToString();
             expression = button.Tag.ToString();
             operationTxtbox.Text= postfixexpression;
